@@ -66,12 +66,4 @@ Note: Only include fields you want to update
 
 2. Set the Content-Type header to `application/json` for all requests
 
-3. Use the example request bodies provided above to test each endpoint
 
-## Response Formats
-
-All endpoints return JSON responses with appropriate HTTP status codes:
-
-- 200: Success
-- 400: Bad Request (missing or invalid parameters)
-- 500: Server Error ](https://github.com/QmpoDev/mongodb-activity-infoman2/wiki)
