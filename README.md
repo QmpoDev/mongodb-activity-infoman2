@@ -1,4 +1,4 @@
-# Student Management API
+[# Student Management API
 
 A simple CRUD API built with PHP and MongoDB for managing student records.
 
@@ -74,4 +74,4 @@ All endpoints return JSON responses with appropriate HTTP status codes:
 
 - 200: Success
 - 400: Bad Request (missing or invalid parameters)
-- 500: Server Error 
+- 500: Server Error ](https://github.com/QmpoDev/mongodb-activity-infoman2/wiki)
