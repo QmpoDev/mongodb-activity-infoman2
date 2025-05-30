@@ -1,4 +1,4 @@
-[# Student Management API
+# Student Management API
 
 A simple CRUD API built with PHP and MongoDB for managing student records.
 
