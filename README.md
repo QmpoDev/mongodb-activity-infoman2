@@ -1,27 +1,55 @@
-# Student Management API
+# Student CRUD - MongoDB CRUD Application
 
-A simple CRUD API built with PHP and MongoDB for managing student records.
+A simple CRUD (Create, Read, Update, Delete). This application demonstrates basic database operations using MongoDB with PHP.
 
+## Technologies Used
+- PHP 8.3.17
+- MongoDB
+- MongoDB PHP Driver
+- Composer (Dependency Manager)
+
+# Project Structure
+
+```plaintext
+mongodb-activity/
+├── composer.json
+├── composer.lock
+├── db.php
+├── create.php
+├── read.php
+├── update.php
+├── delete.php
+└── vendor/
+```
 ## Prerequisites
-
 - PHP 7.4 or higher
 - MongoDB server running on localhost:27017
 - Composer for dependency management
+- Postman (for testing API endpoints)
 
-## Setup
+## Setup Instructions
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   composer install
+   ```
+3. Start MongoDB service
+4. Start the PHP development server:
+   ```bash
+   php -S localhost:80
+   ```
 
-1. Install dependencies:
-```bash
-composer install
-```
+## API Documentation
 
-2. Make sure MongoDB is running on your system
+### 1. Create Student (POST /create.php)
+Creates a new student record in the database.
 
-## API Endpoints
-
-### Create Student
-- **POST** `/create.php`
-- **Body**:
+**Request:**
+- Method: POST
+- URL: `http://localhost/create.php`
+- Headers: 
+  - Content-Type: application/json
+- Body:
 ```json
 {
     "name": "John Doe",
@@ -30,40 +58,88 @@ composer install
 }
 ```
 
-### Read Students
-- **GET** `/read.php` - Get all students
-- **GET** `/read.php?student_id=2024001` - Filter by student ID
-- **GET** `/read.php?course=Computer Science` - Filter by course
-
-### Update Student
-- **POST** `/update.php`
-- **Body**:
+**Response:**
 ```json
 {
-    "id": "student_document_id",
+    "inserted_id": {"$oid": "68391dc35996c453750deb62"}
+}
+```
+
+### 2. Read Students (GET /read.php)
+Retrieves student records from the database.
+
+**Request:**
+- Method: GET
+- URL: `http://localhost/read.php`
+- Optional Query Parameters:
+  - student_id
+  - course
+
+**Examples:**
+- Get all students: `GET /read.php`
+- Filter by student ID: `GET /read.php?student_id=2024001`
+- Filter by course: `GET /read.php?course=Computer Science`
+
+### 3. Update Student (POST /update.php)
+Updates an existing student record.
+
+**Request:**
+- Method: POST
+- URL: `http://localhost/update.php`
+- Headers:
+  - Content-Type: application/json
+- Body:
+```json
+{
+    "id": "68391dc35996c453750deb62",
     "name": "John Doe Updated",
     "course": "Data Science"
 }
 ```
-Note: Only include fields you want to update
 
-### Delete Student
-- **POST** `/delete.php`
-- **Body**:
+**Response:**
 ```json
 {
-    "id": "student_document_id"
+    "modified_count": 1,
+    "matched_count": 1
 }
 ```
 
-## Testing with Postman
+### 4. Delete Student (POST /delete.php)
+Removes a student record from the database.
 
-1. Import the following endpoints into Postman:
-   - Create: POST http://localhost/mongodb-activity/create.php
-   - Read: GET http://localhost/mongodb-activity/read.php
-   - Update: POST http://localhost/mongodb-activity/update.php
-   - Delete: POST http://localhost/mongodb-activity/delete.php
+**Request:**
+- Method: POST
+- URL: `http://localhost/delete.php`
+- Headers:
+  - Content-Type: application/json
+- Body:
+```json
+{
+    "id": "68391dc35996c453750deb62"
+}
+```
 
-2. Set the Content-Type header to `application/json` for all requests
+**Response:**
+```json
+{
+    "deleted_count": 1,
+    "success": true
+}
+```
 
+## Database Structure
 
+### Database: student_db
+### Collection: students
+
+**Document Structure:**
+```json
+{
+    "_id": ObjectId,
+    "name": String,
+    "student_id": String,
+    "course": String,
+    "created_at": DateTime
+}
+```
